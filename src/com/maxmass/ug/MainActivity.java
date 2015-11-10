@@ -1,17 +1,20 @@
 package com.maxmass.ug;
 
-import android.app.Activity;
+import com.actionbarsherlock.app.SherlockActivity;
+
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-public class MainActivity extends Activity {
+public class MainActivity extends SherlockActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_activity);
+		setContentView(R.layout.activity_main);
+		
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6BD6AD")));
 	}
-	
-	
 
+	
 }

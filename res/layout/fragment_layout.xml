@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.maxmass.ug.DashboardLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:background="@drawable/bg1_img" >
+    
+    <Button
+        android:id="@+id/transportbutton"
+        style="@style/DashboardButton"
+        android:drawableTop ="@drawable/car223"
+        android:text="@string/tp" />
+
+    <Button
+        android:id="@+id/hotelbutton"
+        style="@style/DashboardButton"
+        android:drawableTop ="@drawable/sleeping"
+        android:text="@string/ht" />
+
+    <Button
+        android:id="@+id/touratttractionbutton"
+        style="@style/DashboardButton"
+        android:drawableTop ="@drawable/elephant6"
+        android:text="@string/ta" />
+
+    <Button
+        android:id="@+id/dangerspotbutton"
+        style="@style/DashboardButton"
+        android:drawableTop ="@drawable/mark13"
+        android:text="@string/DS" />
+<!-- 
+  	<Button
+        android:id="@+id/currencyconverterbutton"
+        style="@style/DashboardButton"
+        android:drawableTop ="@drawable/ic_launcher"
+        android:text="@string/CC" /> 
+        
+  	<Button
+        android:id="@+id/home"
+        style="@style/DashboardButton"
+        android:drawableTop ="@drawable/ic_launcher"
+        android:text="@string/ab" />  -->
+    
+
+</com.maxmass.ug.DashboardLayout>

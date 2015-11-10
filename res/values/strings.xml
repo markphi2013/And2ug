@@ -6,8 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="tp">Transport</string>
     <string name="ht">Hotel</string>
-    <string name="ta">Tourist Attraction</string>
-    <string name="DS">Dangerous Spots</string>
-    <string name="CC">Currency Converter</string>
-
+    <string name="ta">Tourist\nAttraction</string>
+    <string name="DS">Dangerous\nSpots</string>
+    <string name="CC">Currency\nConverter</string>
+    <string name="ab">About Us</string>
 </resources>
