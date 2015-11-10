@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg1_img"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/transportbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tp" />
+
+    <Button
+        android:id="@+id/hotelbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ht" />
+
+    <Button
+        android:id="@+id/touratttractionbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ta" />
+
+    <Button
+        android:id="@+id/dangerspotbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/DS" />
+
+    <Button
+        android:id="@+id/currencyconverterbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/CC" />
+
+</LinearLayout>

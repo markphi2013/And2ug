@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">2UG</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="tp">Transport</string>
+    <string name="ht">Hotel</string>
+    <string name="ta">Tourist Attraction</string>
+    <string name="DS">Dangerous Spots</string>
+    <string name="CC">Currency Converter</string>
+
+</resources>
