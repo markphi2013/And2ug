@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="black">#000000</color>
+    <color name="et_white">#FCFCFC</color>
+    <color name="et_red">#FE1229</color>    
+    <color name="et_black">#191919</color>
+    <color name="et_grey1">#EEEEEE</color>
+    <color name="et_grey3">#4D4D4D</color>
+    <color name="et_grey2">#878787</color>
+    <color name="et_ls_down">#EEEEEE</color>
+    
+</resources>

@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="1"
-    android:background="@drawable/bg1_img" >
+    android:background="@drawable/bg_img" >
     
     <Button
         android:id="@+id/transportbutton"
