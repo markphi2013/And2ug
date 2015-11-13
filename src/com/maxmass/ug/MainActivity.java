@@ -95,10 +95,24 @@ public class MainActivity extends SherlockActivity {
 
 			break;
 			
+		case android.R.id.home:
+            // ProjectsActivity is my 'home' activity
+            startActivityAfterCleanup(MainActivity.class);
+            return true;
+			
 		default:
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void startActivityAfterCleanup(Class<?> cls) {
+		
+	   // if (projectsDao != null) projectsDao.close();
+	    Intent intent = new Intent(getApplicationContext(), cls);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
+	    
 	}
 
 }

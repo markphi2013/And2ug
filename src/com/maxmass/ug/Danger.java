@@ -1,136 +1,107 @@
 package com.maxmass.ug;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import com.actionbarsherlock.app.SherlockListActivity;
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.Context;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 
 public class Danger extends SherlockListActivity{
 
-	TextView title,details;
-	ImageView image;
-	private DisplayMetrics metrics;
-	
+	// All static variables
+	static final String URL = "http://154.0.129.6/database/spot/spot.xml";
+	// XML node keys
+	static final String KEY_SPOT = "spot"; // parent node
+	static final String KEY_DANGER = "danger";
+	static final String KEY_NAME = "name";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pager_list_content);
 		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6BD6AD")));
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle("Dangerous Spots");
-		metrics = new DisplayMetrics();
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setTitle("Danger");
+		ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
+
+		XMLParser parser = new XMLParser();
+		String xml = parser.getXmlFromUrl(URL); // getting XML
+		Document doc = parser.getDomElement(xml); // getting DOM element
+
+		NodeList nl = doc.getElementsByTagName(KEY_SPOT);
 		
-		new PagesFetcher().execute();
-		
+		// looping through all item nodes <item>
+				for (int i = 0; i < nl.getLength(); i++) {
+					// creating new HashMap
+					HashMap<String, String> map = new HashMap<String, String>();
+					Element e = (Element) nl.item(i);
+					// adding each child node to HashMap key => value
+					map.put(KEY_DANGER, parser.getValue(e, KEY_DANGER));
+					map.put(KEY_NAME, parser.getValue(e, KEY_NAME));
+					
+					// adding HashList to ArrayList
+					menuItems.add(map);
+				}
+				// Adding menuItems to ListView
+				ListAdapter adapter = new SimpleAdapter(this, menuItems,
+						R.layout.plc_row,
+						new String[] { KEY_NAME, KEY_DANGER}, new int[] {
+								R.id.PG_TITLE, R.id.address,R.id.PG_IMAGE });
+
+				setListAdapter(adapter);
 	}
-	private class PageItem {
-		@SuppressWarnings("unused")
-		public String title, details, url;
-		
-		public PageItem(String title, String details, String url) {
-			this.title = title; 
-			this.details = details; 
-			this.url = url;
-		}
-	}
-	
+
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		super.onListItemClick(l, v, position, id);
-		Toast.makeText(Danger.this, "Clicked item at index: "+position, Toast.LENGTH_SHORT).show();
-		
+		getSupportMenuInflater().inflate(R.menu.actionmenu, menu);
+		return true;
 	}
-	public class PagesAdapter extends ArrayAdapter<PageItem> {
 
-		  private Context context;
-		  private LayoutInflater mInflater;
-		  @SuppressWarnings("unused")
-		  private DisplayMetrics metrics_;
-		  
-		public PagesAdapter(Context context, DisplayMetrics metrics) {
-			super(context, 0);
-			this.context = context;
-			this.mInflater = (LayoutInflater) this.context
-				     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
-			this.metrics_ = metrics;
-		}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		
+		case R.id.currceny_convertor:
+			
+			break;
+			
+		case R.id.about_us:
 
-		@SuppressLint("InflateParams")
-		public View getView(int position, View convertView, ViewGroup parent) {
-			Animation animation = null;
+			break;
 			
-			if (convertView == null) {
-				convertView = mInflater.inflate(R.layout.plc_row, null);
-			}
-			
-			animation = AnimationUtils.loadAnimation(context, R.anim.slide_top_to_bottom);
-			
-			TextView title = (TextView) convertView.findViewById(R.id.PG_TITLE);
-			title.setText(getItem(position).title);
-			
-			TextView details = (TextView) convertView.findViewById(R.id.PG_DETAILS);
-			details.setText(getItem(position).details);
-			
-			ImageView image = (ImageView) convertView.findViewById(R.id.PG_IMAGE);
-			image.setImageResource(R.drawable.gorilla_uganda);
-			
-			   animation.setDuration(500);
-			   convertView.startAnimation(animation);
-			   animation = null;
-			return convertView;
-		}
-
-	}
-	private class PagesFetcher extends AsyncTask<String, String, String> {
-		ProgressDialog dialog;
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			dialog = ProgressDialog.show(Danger.this, "Loading","Wait...", true);
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			return null;
+		case android.R.id.home:
+            // ProjectsActivity is my 'home' activity
+            startActivityAfterCleanup(MainActivity.class);
+       
+		default:
+			break;
 		}
 		
-		@Override
-		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			dialog.dismiss();
-			PagesAdapter adapter = new PagesAdapter(Danger.this, metrics);
-			
-			for(int i = 0; i < 10; i++){
-				adapter.add(new PageItem("Demo Page Title", "This is a place where men come and share life together, "
-   		                 + "and expose themselves to topics that grow them "
-   		                + "individually make sure you dont miss it tis time round", ""));
-			}
-			
-			setListAdapter(adapter);
-		}
-		
-		
+		return super.onOptionsItemSelected(item);
 	}
 	
+	private void startActivityAfterCleanup(Class<?> cls) {
+		
+	   // if (projectsDao != null) projectsDao.close();
+	    Intent intent = new Intent(getApplicationContext(), cls);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
+	    
+    }
 
 }

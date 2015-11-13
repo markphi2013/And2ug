@@ -1,10 +1,13 @@
 package com.maxmass.ug;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -85,7 +88,7 @@ public class Tourist extends SherlockListActivity{
 			TextView title = (TextView) convertView.findViewById(R.id.PG_TITLE);
 			title.setText(getItem(position).title);
 			
-			TextView details = (TextView) convertView.findViewById(R.id.PG_DETAILS);
+			TextView details = (TextView) convertView.findViewById(R.id.address);
 			details.setText(getItem(position).details);
 			
 			ImageView image = (ImageView) convertView.findViewById(R.id.PG_IMAGE);
@@ -130,5 +133,47 @@ public class Tourist extends SherlockListActivity{
 		}
 
 	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		getSupportMenuInflater().inflate(R.menu.actionmenu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		
+		case R.id.currceny_convertor:
+			
+			break;
+			
+		case R.id.about_us:
+
+			break;
+			
+		case android.R.id.home:
+            // ProjectsActivity is my 'home' activity
+            startActivityAfterCleanup(MainActivity.class);
+            break;
+            
+            
+			
+		default:
+			
+			break;
+	  }
+		return super.onOptionsItemSelected(item);
+	}
+	
+	private void startActivityAfterCleanup(Class<?> cls) {
+		
+	   // if (projectsDao != null) projectsDao.close();
+	    Intent intent = new Intent(getApplicationContext(), cls);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
+	    
+    }
 
 }

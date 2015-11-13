@@ -22,7 +22,7 @@
 		        android:id="@+id/PG_IMAGE"
 		        android:layout_width="@dimen/list_img_dimens"
 		        android:layout_height="match_parent"
-		        android:src="@drawable/ic_launcher" 
+		        android:src="@drawable/application_icon" 
 		        android:padding="2dp"
 		        android:layout_marginRight="5dp"
 		        android:contentDescription="@string/app_name"/>
@@ -45,12 +45,42 @@
 			        android:textAppearance="@android:style/TextAppearance.Small" />
 			    
 			    <TextView
-			        android:id="@+id/PG_DETAILS"
+			        android:id="@+id/address"
 			        android:layout_width="wrap_content"
 			        android:layout_height="0dp"
 			        android:layout_weight="1"
 			        android:gravity="center_vertical"
-			        android:text="Detials"
+			        android:text="Address"
+			        android:layout_marginBottom="@dimen/margin_btwn1"
+			        android:textSize="@dimen/text_size_ui_details"
+			        android:textColor="@color/et_grey2" />
+			    <TextView
+			        android:id="@+id/telphone"
+			        android:layout_width="wrap_content"
+			        android:layout_height="0dp"
+			        android:layout_weight="1"
+			        android:gravity="center_vertical"
+			        android:text="Telephone"
+			        android:layout_marginBottom="@dimen/margin_btwn1"
+			        android:textSize="@dimen/text_size_ui_details"
+			        android:textColor="@color/et_grey2" />
+			    <TextView
+			        android:id="@+id/district"
+			        android:layout_width="wrap_content"
+			        android:layout_height="0dp"
+			        android:layout_weight="1"
+			        android:gravity="center_vertical"
+			        android:text="District"
+			        android:layout_marginBottom="@dimen/margin_btwn1"
+			        android:textSize="@dimen/text_size_ui_details"
+			        android:textColor="@color/et_grey2" />
+			    <TextView
+			        android:id="@+id/type"
+			        android:layout_width="wrap_content"
+			        android:layout_height="0dp"
+			        android:layout_weight="1"
+			        android:gravity="center_vertical"
+			        android:text="Type"
 			        android:layout_marginBottom="@dimen/margin_btwn1"
 			        android:textSize="@dimen/text_size_ui_details"
 			        android:textColor="@color/et_grey2" />

@@ -1,134 +1,120 @@
 package com.maxmass.ug;
 
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ArrayAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Transport extends SherlockListActivity{
+public class Transport extends SherlockFragmentActivity{
 
 	TextView title,details;
 	ImageView image;
-	private DisplayMetrics metrics;
-	
+	ViewPager Tab;
+	ActionBar actionBar;
+    TabPagerAdapter TabAdapter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pager_list_content);
+		setContentView(R.layout.activity_main);
 		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6BD6AD")));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("Transport Services");
-		metrics = new DisplayMetrics();
+
+		TabAdapter = new TabPagerAdapter(getSupportFragmentManager());
 		
-		new PagesFetcher().execute();
+		Tab = (ViewPager)findViewById(R.id.pager);
+        Tab.setOnPageChangeListener(
+                new ViewPager.SimpleOnPageChangeListener() {
+                    @Override
+                    public void onPageSelected(int position) {
+                       
+                    	actionBar = getSupportActionBar();
+                    	actionBar.setSelectedNavigationItem(position);                    }
+                });
+        Tab.setAdapter(TabAdapter);
+        
+        actionBar = getSupportActionBar();
+        //Enable Tabs on Action Bar
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        ActionBar.TabListener tabListener = new ActionBar.TabListener(){
+
+			@Override
+			public void onTabSelected(com.actionbarsherlock.app.ActionBar.Tab tab, FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+				Tab.setCurrentItem(tab.getPosition());
+			}
+
+			@Override
+			public void onTabUnselected(com.actionbarsherlock.app.ActionBar.Tab tab, FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onTabReselected(com.actionbarsherlock.app.ActionBar.Tab tab, FragmentTransaction ft) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        };
+        //Add New Tab
+		actionBar.addTab(actionBar.newTab().setText("SpecialHire").setTabListener(tabListener));
+		actionBar.addTab(actionBar.newTab().setText("Tour").setTabListener(tabListener));
+		actionBar.addTab(actionBar.newTab().setText("Other").setTabListener(tabListener));
 		
 	}
-	private class PageItem {
-		@SuppressWarnings("unused")
-		public String title, details, url;
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		getSupportMenuInflater().inflate(R.menu.actionmenu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
 		
-		public PageItem(String title, String details, String url) {
-			this.title = title; 
-			this.details = details; 
-			this.url = url;
-		}
+		case R.id.currceny_convertor:
+			
+			break;
+			
+		case R.id.about_us:
+
+			break;
+			
+		case android.R.id.home:
+            // ProjectsActivity is my 'home' activity
+            startActivityAfterCleanup(MainActivity.class);
+            break;
+ 
+		default:
+			break;
+			
+	   }
+		return super.onOptionsItemSelected(item);
 	}
 	
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
-		super.onListItemClick(l, v, position, id);
-		Toast.makeText(Transport.this, "Clicked item at index: "+position, Toast.LENGTH_SHORT).show();
-	}
-	public class PagesAdapter extends ArrayAdapter<PageItem> {
-
-		  private Context context;
-		  private LayoutInflater mInflater;
-		  @SuppressWarnings("unused")
-		  private DisplayMetrics metrics_;
-		  
-		public PagesAdapter(Context context, DisplayMetrics metrics) {
-			super(context, 0);
-			this.context = context;
-			this.mInflater = (LayoutInflater) this.context
-				     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);			
-			this.metrics_ = metrics;
-		}
-
-		@SuppressLint("InflateParams")
-		public View getView(int position, View convertView, ViewGroup parent) {
-			Animation animation = null;
-			
-			if (convertView == null) {
-				convertView = mInflater.inflate(R.layout.plc_row, null);
-			}
-			
-			animation = AnimationUtils.loadAnimation(context, R.anim.slide_top_to_bottom);
-			
-			TextView title = (TextView) convertView.findViewById(R.id.PG_TITLE);
-			title.setText(getItem(position).title);
-			
-			TextView details = (TextView) convertView.findViewById(R.id.PG_DETAILS);
-			details.setText(getItem(position).details);
-			
-			ImageView image = (ImageView) convertView.findViewById(R.id.PG_IMAGE);
-			image.setImageResource(R.drawable.gorilla_uganda);
-			
-			   animation.setDuration(500);
-			   convertView.startAnimation(animation);
-			   animation = null;
-			return convertView;
-		}
-
-	}
-	private class PagesFetcher extends AsyncTask<String, String, String> {
-		ProgressDialog dialog;
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			dialog = ProgressDialog.show(Transport.this, "Loading","Wait...", true);
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	private void startActivityAfterCleanup(Class<?> cls) {
 		
-		@Override
-		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			dialog.dismiss();
-			PagesAdapter adapter = new PagesAdapter(Transport.this, metrics);
-			
-			for(int i = 0; i < 10; i++){
-				adapter.add(new PageItem("Demo Page Title", "This is a place where men come and share life together, "
-   		                 + "and expose themselves to topics that grow them "
-   		                + "individually make sure you dont miss it tis time round", ""));
-			}
-			
-			setListAdapter(adapter);
-		}
-
-	}
+	   // if (projectsDao != null) projectsDao.close();
+	    Intent intent = new Intent(getApplicationContext(), cls);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
+	    
+    }
 
 }
