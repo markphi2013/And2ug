@@ -1,6 +1,6 @@
 package com.maxmass.ug;
 
-import android.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,31 +39,31 @@ public class Transport extends SherlockFragmentActivity{
                     @Override
                     public void onPageSelected(int position) {
                        
-                    	actionBar = getActionBar();
+                    	actionBar = getSupportActionBar();
                     	actionBar.setSelectedNavigationItem(position);                    }
                 });
         Tab.setAdapter(TabAdapter);
         
-        actionBar = getActionBar();
+        actionBar = getSupportActionBar();
         //Enable Tabs on Action Bar
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         ActionBar.TabListener tabListener = new ActionBar.TabListener(){
 
 			@Override
-			public void onTabSelected(android.app.ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+			public void onTabSelected(com.actionbarsherlock.app.ActionBar.Tab tab, FragmentTransaction ft) {
 				// TODO Auto-generated method stub
 				Tab.setCurrentItem(tab.getPosition());
 			}
 
 			@Override
-			public void onTabUnselected(android.app.ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+			public void onTabUnselected(com.actionbarsherlock.app.ActionBar.Tab tab, FragmentTransaction ft) {
 				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
-			public void onTabReselected(android.app.ActionBar.Tab tab, android.app.FragmentTransaction ft) {
+			public void onTabReselected(com.actionbarsherlock.app.ActionBar.Tab tab, FragmentTransaction ft) {
 				// TODO Auto-generated method stub
 				
 			}
