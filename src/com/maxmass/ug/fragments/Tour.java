@@ -7,6 +7,8 @@ import java.util.HashMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.maxmass.ug.R;
 import com.maxmass.ug.XMLParser;
 import android.annotation.SuppressLint;
@@ -14,7 +16,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Tour extends ListFragment{
+public class Tour extends SherlockListFragment{
 
 	private DisplayMetrics metrics;  
 	String tag;

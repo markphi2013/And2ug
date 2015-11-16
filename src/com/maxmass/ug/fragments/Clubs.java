@@ -1,6 +1,5 @@
 package com.maxmass.ug.fragments;
 
-import android.support.v4.app.ListFragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import com.actionbarsherlock.app.SherlockListFragment;
 import com.maxmass.ug.R;
 import com.maxmass.ug.XMLParser;
 import android.annotation.SuppressLint;
@@ -26,7 +26,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-public class Clubs extends ListFragment{
+public class Clubs extends SherlockListFragment{
 
 	private DisplayMetrics metrics;  
 	String tag;
