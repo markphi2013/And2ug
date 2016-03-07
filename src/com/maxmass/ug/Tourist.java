@@ -44,14 +44,18 @@ public class Tourist extends SherlockListActivity{
 		
 	}
 	private class PageItem {
+		
 		@SuppressWarnings("unused")
 		public String title, details, url;
 		
 		public PageItem(String title, String details, String url) {
+			
 			this.title = title; 
 			this.details = details; 
 			this.url = url;
+			
 		}
+		
 	}
 	
 	@Override
@@ -60,6 +64,7 @@ public class Tourist extends SherlockListActivity{
 		super.onListItemClick(l, v, position, id);
 		Toast.makeText(Tourist.this, "Clicked item at index: "+position, Toast.LENGTH_SHORT).show();
 	}
+	
 	public class PagesAdapter extends ArrayAdapter<PageItem> {
 
 		  private Context context;
@@ -68,6 +73,7 @@ public class Tourist extends SherlockListActivity{
 		  private DisplayMetrics metrics_;
 		  
 		public PagesAdapter(Context context, DisplayMetrics metrics) {
+			
 			super(context, 0);
 			this.context = context;
 			this.mInflater = (LayoutInflater) this.context
@@ -101,7 +107,9 @@ public class Tourist extends SherlockListActivity{
 		}
 
 	}
+	
 	private class PagesFetcher extends AsyncTask<String, String, String> {
+		
 		ProgressDialog dialog;
 		@Override
 		protected void onPreExecute() {
@@ -157,9 +165,7 @@ public class Tourist extends SherlockListActivity{
             // ProjectsActivity is my 'home' activity
             startActivityAfterCleanup(MainActivity.class);
             break;
-            
-            
-			
+
 		default:
 			
 			break;

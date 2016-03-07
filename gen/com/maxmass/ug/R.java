@@ -1007,9 +1007,9 @@ containing a value of this type.
         public static final int uganda=0x7f0200a1;
     }
     public static final class id {
-        public static final int PG_IMAGE=0x7f090037;
-        public static final int PG_TITLE=0x7f090038;
-        public static final int about_us=0x7f09003f;
+        public static final int PG_IMAGE=0x7f090038;
+        public static final int PG_TITLE=0x7f090039;
+        public static final int about_us=0x7f090040;
         public static final int abs__action_bar=0x7f090020;
         public static final int abs__action_bar_container=0x7f09001f;
         public static final int abs__action_bar_subtitle=0x7f090011;
@@ -1049,15 +1049,16 @@ containing a value of this type.
         public static final int abs__textButton=0x7f090013;
         public static final int abs__title=0x7f09001b;
         public static final int abs__up=0x7f090001;
-        public static final int action_settings=0x7f090040;
-        public static final int address=0x7f090039;
-        public static final int currceny_convertor=0x7f09003e;
+        public static final int action_settings=0x7f090041;
+        public static final int address=0x7f09003a;
+        public static final int currceny_convertor=0x7f09003f;
         public static final int dangerspotbutton=0x7f090036;
         public static final int disableHome=0x7f09000a;
-        public static final int district=0x7f09003b;
+        public static final int district=0x7f09003c;
         public static final int edit_query=0x7f090026;
-        public static final int empty=0x7f09003d;
+        public static final int empty=0x7f09003e;
         public static final int homeAsUp=0x7f09000b;
+        public static final int home_root=0x7f090037;
         public static final int hotelbutton=0x7f090034;
         public static final int listMode=0x7f090007;
         public static final int normal=0x7f090008;
@@ -1066,10 +1067,10 @@ containing a value of this type.
         public static final int showHome=0x7f09000d;
         public static final int showTitle=0x7f09000e;
         public static final int tabMode=0x7f090009;
-        public static final int telphone=0x7f09003a;
+        public static final int telphone=0x7f09003b;
         public static final int touratttractionbutton=0x7f090035;
         public static final int transportbutton=0x7f090033;
-        public static final int type=0x7f09003c;
+        public static final int type=0x7f09003d;
         public static final int useLogo=0x7f09000f;
         public static final int wrap_content=0x7f090006;
     }
@@ -1100,11 +1101,12 @@ containing a value of this type.
         public static final int abs__simple_dropdown_hint=0x7f030014;
         public static final int activity_main=0x7f030015;
         public static final int fragment_layout=0x7f030016;
-        public static final int pager_list_content=0x7f030017;
-        public static final int plc_row=0x7f030018;
-        public static final int sherlock_spinner_dropdown_item=0x7f030019;
-        public static final int sherlock_spinner_item=0x7f03001a;
-        public static final int splash=0x7f03001b;
+        public static final int main=0x7f030017;
+        public static final int pager_list_content=0x7f030018;
+        public static final int plc_row=0x7f030019;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001a;
+        public static final int sherlock_spinner_item=0x7f03001b;
+        public static final int splash=0x7f03001c;
     }
     public static final class menu {
         public static final int actionmenu=0x7f0c0000;

@@ -1,6 +1,14 @@
 package com.maxmass.ug.fragments;
 
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,6 +25,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,19 +56,22 @@ public class SpecialHire extends SherlockListFragment{
 
 	@SuppressLint("InflateParams")
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		
 		return inflater.inflate(R.layout.pager_list_content, null);
 	}	
 
 	public void onActivityCreated(Bundle savedInstanceState) {
+		
 		super.onActivityCreated(savedInstanceState);
 		getActivity().setTitle("Special Hires");
 		
 		metrics = new DisplayMetrics();
 	    getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-			new PagesFetcher().execute();
+			new PagesFetcher().execute(new String[] { URL });
 	
 	}
+	
 	private class PageItem {
 		@SuppressWarnings("unused")
 		public String title, address, telphone,district,type;
@@ -135,27 +147,30 @@ public class SpecialHire extends SherlockListFragment{
 		}
 
 		@Override
-		protected String doInBackground(String... params) {
+		protected String doInBackground(String... urls) {
 			// TODO Auto-generated method stub
-			String response = "";						
-			
-			return response;
+			String xml = null;
+            for (String url : urls) {
+                xml = getXmlFromUrl(url);
+            }
+            return xml;
 			
 		}
 
 		@Override
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(String xml) {
 			// TODO Auto-generated method stub
-			super.onPostExecute(result);
+			super.onPostExecute(xml);
 			dialog.dismiss();
 			
 			PagesAdapter adapter = new PagesAdapter(getActivity(), metrics);
 			ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
 
 			XMLParser parser = new XMLParser();
-			String xml = parser.getXmlFromUrl(URL); // getting XML
-			Document doc = parser.getDomElement(xml); // getting DOM element
-
+//			String xml = parser.getXmlFromUrl(URL); // getting XML
+//			Document doc = parser.getDomElement(xml); // getting DOM element
+            InputStream stream = new ByteArrayInputStream(xml.getBytes());
+            Document doc = parser.getDocument(stream);
 			NodeList nl = doc.getElementsByTagName(KEY_APARTMENT);
 			
 			// looping through all item nodes <item>
@@ -176,6 +191,36 @@ public class SpecialHire extends SherlockListFragment{
 			
 			adapter.add(new PageItem(KEY_NAME,KEY_ADDRESS,KEY_TELEPHONE,KEY_DISTRICT,KEY_TYPE));
 			setListAdapter(adapter);
+		}
+		
+		private String getXmlFromUrl(String urlString) {
+            StringBuffer output = new StringBuffer("");
+ 
+            InputStream stream = null;
+            java.net.URL url;
+            try {
+                url = new java.net.URL(urlString);
+                URLConnection connection = url.openConnection();
+ 
+                HttpURLConnection httpConnection = (HttpURLConnection) connection;
+                httpConnection.setRequestMethod("GET");
+                httpConnection.connect();
+ 
+                if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    stream = httpConnection.getInputStream();
+                    BufferedReader buffer = new BufferedReader(
+                            new InputStreamReader(stream));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null)
+                        output.append(s);
+                }
+            } catch (MalformedURLException e) {
+                Log.e("Error", "Unable to parse URL", e);
+            } catch (IOException e) {
+                Log.e("Error", "IO Exception", e);
+            }
+                     
+            return output.toString();
 		}
 
 	}
