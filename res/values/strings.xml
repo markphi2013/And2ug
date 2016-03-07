@@ -10,4 +10,9 @@
     <string name="DS">Dangerous\nSpots</string>
     <string name="CC">Currency\nConverter</string>
     <string name="ab">About Us</string>
+    <string name="addr">Address</string>
+    <string name="dist">District</string>
+    <string name="telep">Telephone</string>
+    <string name="title">Title</string>
+    <string name="type">Type</string>
 </resources>
